@@ -43,8 +43,8 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Barangay Dela Paz Norte Records Management System</h1>
-							<p>by OLFU Students | BSIT</p>
+							<h1 class="heading">Barangay Dela Paz Norte</h1>
+							<p>Records Management System</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>

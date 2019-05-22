@@ -41,18 +41,20 @@ if(!function_exists('get_navBlade')){
                         <ul class="nav navbar-nav navbar-right">                                                       
                             <li class="dropdown">
                                 <?php
-                                    if($_SESSION['role_type'] == "Admin"){
-                                        ?>
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="resources/img/user.png" class="img-circle" alt="Avatar"> <span>Administrator</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>        
-                                        <?php
-                                    }else{
-                                            include "database/config.php";
-                                            include "controllers/users_functions.php";
-                                            include "controllers/residents_functions.php";
-                                        ?>
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="resources/img/user.png" class="img-circle" alt="Avatar"> <span><?php echo getResidentDetailsById($conn, getUserDetailsByUsername($conn, $_SESSION['username'])[0])[1] ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>                
-                                        <?php
-                                    }
+                                    if(isset($_SESSION['role_type'])){
+                                        if($_SESSION['role_type'] == "Admin"){
+                                            ?>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="resources/img/user.png" class="img-circle" alt="Avatar"> <span>Administrator</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>        
+                                            <?php
+                                        }else{
+                                                include "database/config.php";
+                                                include "controllers/users_functions.php";
+                                                include "controllers/residents_functions.php";
+                                            ?>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="resources/img/user.png" class="img-circle" alt="Avatar"> <span><?php echo getResidentDetailsById($conn, getUserDetailsByUsername($conn, $_SESSION['username'])[0])[1] ?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>                
+                                            <?php
+                                        }
+                                    }                                    
                                 ?>                                
                                 <ul class="dropdown-menu">
                                     <li><a href="user_profile.php"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
@@ -79,34 +81,36 @@ if(!function_exists('get_sideBlade')){
                 <div class="sidebar-scroll">
                     <nav>
                         <?php
-                            if($_SESSION['role_type'] == "Admin"){
-                                ?>
-                                    <ul class="nav">
-                                        <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-                                        <li><a href="residents.php" class=""><i class="lnr lnr-list"></i> <span>Residents</span></a></li>
-                                        <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
-                                        <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>
-                                        <li><a href="officials.php" class=""><i class="lnr lnr-shirt"></i> <span>Officials</span></a></li>
-                                        <li><a href="user_management.php" class=""><i class="lnr lnr-users"></i> <span>User Management</span></a></li>                                            
-                                    </ul>
-                                <?php    
-                            }elseif($_SESSION['role_type'] == "Official"){
-                                ?>
-                                    <ul class="nav">
-                                        <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>                                        
-                                        <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
-                                        <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>                                        
-                                    </ul>
-                                <?php
-                            }else{
-                                ?>
-                                    <ul class="nav">
-                                        <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>                                        
-                                        <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
-                                        <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>                                        
-                                    </ul>
-                                <?php
-                            }
+                            if(isset($_SESSION['role_type'])){
+                                if($_SESSION['role_type'] == "Admin"){
+                                    ?>
+                                        <ul class="nav">
+                                            <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                                            <li><a href="residents.php" class=""><i class="lnr lnr-list"></i> <span>Residents</span></a></li>
+                                            <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
+                                            <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>
+                                            <li><a href="officials.php" class=""><i class="lnr lnr-shirt"></i> <span>Officials</span></a></li>
+                                            <li><a href="user_management.php" class=""><i class="lnr lnr-users"></i> <span>User Management</span></a></li>                                            
+                                        </ul>
+                                    <?php    
+                                }elseif($_SESSION['role_type'] == "Official"){
+                                    ?>
+                                        <ul class="nav">
+                                            <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>                                        
+                                            <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
+                                            <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>                                        
+                                        </ul>
+                                    <?php
+                                }else{
+                                    ?>
+                                        <ul class="nav">
+                                            <li><a href="dashboard.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>                                        
+                                            <li><a href="certificates.php" class=""><i class="lnr lnr-printer"></i> <span>Certificates</span></a></li>
+                                            <li><a href="blotters.php" class=""><i class="lnr lnr-calendar-full"></i> <span>Blotters</span></a></li>                                        
+                                        </ul>
+                                    <?php
+                                }
+                            }                            
                         ?>                            
                     </nav>
                 </div>
