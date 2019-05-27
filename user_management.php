@@ -3,6 +3,7 @@ session_start();
 include "database/config.php";
 include "controllers/partials_functions.php";
 include "controllers/sql_functions.php";
+include "controllers/users_functions.php";
 ?>
 
 <!doctype html>
@@ -20,31 +21,28 @@ include "controllers/sql_functions.php";
                         <h3 class="page-title">User Management</h3>                        
                         <div class="row">                            
                             <div class="col-md-12">
-                                <!-- TABLE HOVER -->
                                 <div class="panel">
                                     <div class="panel-heading">
-                                        <div class="col-md-2">
-                                            <button class="btn btn-primary" type="button">"Add User"<span class="badge"><?php ?></span> </button>
-                                            <button class="btn btn-primary" type="button">Unverified List: <span class="badge"><?php echo selectQuery($conn, "SELECT COUNT(*) from verify_residents_tb where status = 'Unverified'") ?></span> </button>                                                                                        
-                                        </div>                                        
+                                        <button type="button" class="btn btn-primary btn-block">
+                                            <a href="user_management_add.php">Manual Add User</a>
+                                        </button>
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th>Username</th>
                                                     <th>First Name</th>
                                                     <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Role Type</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+                                                <?php getUserList($conn) ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <!-- END TABLE HOVER -->
                             </div>
                         </div>                        
                     </div>
